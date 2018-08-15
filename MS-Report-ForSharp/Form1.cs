@@ -35,17 +35,6 @@ namespace MS_Report_ForSharp
             this.rv.ProcessingMode = ProcessingMode.Local;
             rv.PageCountMode = PageCountMode.Actual;
             this.rv.LocalReport.ReportEmbeddedResource = "MS_Report_ForSharp.Report.rdlc";
-            //DataTable dt = new DataTable();
-            //for (int i = 1; i < 4; i++)
-            //{
-            //    dt.Columns.Add(string.Format("FileName{0}", i.ToString()));
-            //    dt.Columns.Add(string.Format("Hash{0}", i.ToString()));
-            //}
-
-            //dt.Rows.Add(new object[] {
-            //    "fileName1","fileName2","fileName3",
-            //    "Hash1","Hash2","Hash3"
-            //});
 
             SummaryData s = new SummaryData();
             s.FileName1 = "name1";
