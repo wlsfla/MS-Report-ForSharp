@@ -47,6 +47,12 @@ namespace MS_Report_ForSharp
             }
         }
 
+		public void ExportPDF(string path, string local_EmbeddedResource_Path) {
+			this.Local_EmbeddedResource = local_EmbeddedResource_Path;
+			this.Export(this.GetByte("PDF"), path, FileMode.Create);
+
+		}
+
 		/// <summary>
 		/// Report 새로고침
 		/// </summary>
@@ -55,6 +61,9 @@ namespace MS_Report_ForSharp
 			this.rpt.RefreshReport();
 		}
 
+		/// <summary>
+		/// 특정 형식으로 Byte[]를 만든다
+		/// </summary>
 		public byte[] GetByte(string sType) {
 			Warning[] warning;
 			string[] streamids;
@@ -68,17 +77,23 @@ namespace MS_Report_ForSharp
 			return bb;
 		}
 
+		/// <summary>
+		/// byte[]를 파일에 쓴다.
+		/// </summary>
 		public void Export(byte[] b, string path, FileMode fileMode) {
 			using (FileStream fs = new FileStream(path, fileMode)) {
 				fs.Write(b, 0, b.Length);
 			}
 		}
 
-		public void SetBindingSource(object list, string dataSetName) {
-			BindingSource bs = new BindingSource();
-			bs.DataSource = list;
+		/// <summary>
+		/// Source Data 바인딩
+		/// </summary>
+		public void SetBindingSource(string dataSetName, object list) {
+			//BindingSource bs = new BindingSource();
+			//bs.DataSource = list;
 
-			ReportDataSource source = new ReportDataSource(dataSet, bs);
+			ReportDataSource source = new ReportDataSource(dataSetName, list);
 			this.rpt.LocalReport.DataSources.Add(source);
 		}
 
